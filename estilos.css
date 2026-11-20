@@ -41,3 +41,75 @@ html{scroll-padding-top:107px}.site-header{height:auto;min-height:92px;padding:7
 .playlist-delete{width:30px;height:30px;flex:0 0 30px;border:0;border-radius:50%;background:#f8e9f6;color:#9c6d9a;font-size:20px;line-height:1}
 .playlist-delete:hover{background:#ecd0e9}
 @media(max-width:760px){.playlist-panel{width:min(96%,570px);padding:14px 12px;margin-top:10px}.playlist-heading{flex-direction:column;align-items:flex-start;gap:4px;font-size:17px}}
+
+/* Ajustes de maquetación para pantallas pequeñas (iPhone / Android).
+   Menú en una sola fila deslizable, carta sin adornos superpuestos
+   y sobre adaptable al ancho real disponible. */
+@media (max-width:760px) {
+  html { scroll-padding-top:68px; }
+  body { overflow-x:clip; }
+  .site-shell { width:100%; margin:0; overflow-x:clip; }
+  .site-header {
+    height:62px; min-height:62px; padding:0 6px; gap:0;
+    flex-direction:row; align-items:center;
+  }
+  .top-nav {
+    display:flex; flex:1; width:100%; max-width:100%;
+    flex-wrap:nowrap; justify-content:flex-start; gap:3px;
+    overflow-x:auto; overscroll-behavior-x:contain;
+    scroll-snap-type:x proximity; scrollbar-width:none;
+    -webkit-overflow-scrolling:touch; padding:7px 4px;
+  }
+  .top-nav::-webkit-scrollbar { display:none; }
+  .nav-link {
+    flex:0 0 auto; white-space:nowrap; scroll-snap-align:start;
+    font-size:12px; padding:9px 12px;
+  }
+  .content-section { padding-left:clamp(14px,4vw,22px); padding-right:clamp(14px,4vw,22px); }
+  .section-heading, .section-heading h2 { max-width:100%; }
+  .letter-layout { min-width:0; width:100%; grid-template-columns:minmax(0,1fr); gap:27px; }
+  .letter-preview {
+    width:100%; max-width:520px; margin:0 auto; box-sizing:border-box;
+    padding:65px clamp(18px,6vw,28px) 34px; border-radius:24px;
+    transform:none; 
+  }
+  .letter-preview h3 {
+    position:relative; z-index:1; max-width:100%;
+    font-size:clamp(23px,6.1vw,30px); line-height:1.32;
+    margin:0 auto 19px; overflow-wrap:break-word;
+  }
+  .letter-preview p { max-width:100%; font-size:clamp(13px,3.7vw,15px); line-height:1.75; }
+  .letter-illustration-heart {
+    top:8px; left:15px; font-size:39px; opacity:.5; pointer-events:none;
+  }
+  .letter-stamp {
+    top:12px; right:15px; width:37px; height:37px;
+    font-size:24px; opacity:.5; pointer-events:none;
+  }
+  .letter-preview .primary-button { max-width:100%; }
+  .envelope-scene { width:100%; max-width:390px; height:265px; margin:0 auto; }
+  .envelope-back, .envelope-front, .envelope-flap {
+    width:min(310px,92%); height:188px;
+  }
+  .envelope-note {
+    width:min(244px,74%); height:202px; bottom:54px;
+    padding-top:46px; font-size:30px;
+  }
+  .envelope-note:before { font-size:54px; }
+  .envelope-seal { bottom:47px; }
+  .envelope-sparkle { top:0; right:12px; }
+  .open-letter-sheet { width:100%; max-width:100%; box-sizing:border-box; }
+}
+@media (max-width:390px) {
+  .letter-preview { padding:61px 17px 30px; }
+  .letter-preview h3 { font-size:23px; }
+  .letter-illustration-heart { left:10px; font-size:34px; }
+  .letter-stamp { right:10px; opacity:.4; }
+  .envelope-back, .envelope-front, .envelope-flap { width:min(285px,92%); }
+  .envelope-note { width:min(220px,72%); }
+}
+@media (max-width:360px) {
+  .nav-link { padding:8px 10px; font-size:11px; }
+  .letter-preview h3 { font-size:22px; }
+  .letter-preview .button { font-size:12px; padding:11px 15px; }
+}
