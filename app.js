@@ -546,8 +546,17 @@ function initScrollEffects() {
         navLinks.forEach(link => {
           const active = link.getAttribute('href') === `#${entry.target.id}`;
           link.classList.toggle('active', active);
-          if (active) link.setAttribute('aria-current', 'location');
-          else link.removeAttribute('aria-current');
+          if (active) {
+            link.setAttribute('aria-current', 'location');
+            // En móvil, mantener visible la pestaña activa sin desplazar la página.
+            const nav = link.parentElement;
+            if (window.innerWidth <= 760 && nav && nav.scrollWidth > nav.clientWidth) {
+              const navBounds = nav.getBoundingClientRect();
+              const tabBounds = link.getBoundingClientRect();
+              const next = nav.scrollLeft + (tabBounds.left - navBounds.left) - (navBounds.width - tabBounds.width) / 2;
+              nav.scrollTo({ left: Math.max(0, next), behavior: 'smooth' });
+            }
+          } else link.removeAttribute('aria-current');
         });
       });
     }, { rootMargin: '-23% 0px -62% 0px', threshold: 0 });
